@@ -6,7 +6,6 @@ use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -17,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = CategoryResource::collection(Category::all());
-//        $categories = CategoryResource::collection(Category::paginate(10));
+
         return Inertia::render('Categories/Index', ['categories' => $categories]);
     }
 
@@ -61,6 +60,7 @@ class CategoryController extends Controller
     public function update(CategoryUpdateRequest $request, Category $category)
     {
         $category->update($request->validated());
+
         return redirect()->route('categories.index');
     }
 
