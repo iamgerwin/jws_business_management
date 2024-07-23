@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -21,9 +22,9 @@ Route::get('/dashboard', function () {
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('categories', CategoryController::class);
+    Route::resource('tags', TagController::class);
 //    Route::resource('businesses', BusinessController::class);
 //    Route::resource('people', \App\Models\Person::class);
-//    Route::resource('tags', \App\Models\Tag::class);
 //    Route::resource('tasks', \App\Models\Task::class);
 });
 
