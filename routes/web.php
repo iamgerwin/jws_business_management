@@ -20,7 +20,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::resource('categories', CategoryController::class, ['only' => ['index','create', 'store', 'show']]);
+    Route::resource('categories', CategoryController::class);
 //    Route::resource('businesses', BusinessController::class);
 //    Route::resource('people', \App\Models\Person::class);
 //    Route::resource('tags', \App\Models\Tag::class);

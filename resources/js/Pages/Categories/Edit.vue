@@ -1,26 +1,32 @@
 <script setup>
-    import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-    import {Head, Link, useForm} from '@inertiajs/vue3';
-    import PrimaryButton from "@/Components/PrimaryButton.vue";
-    import InputError from "@/Components/InputError.vue";
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import {Head, Link, useForm, usePage} from '@inertiajs/vue3';
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import InputError from "@/Components/InputError.vue";
 
-    const form = useForm({
-        name: null,
-    })
+defineProps({
 
-    const submit = () => {
-        form.post(route('categories.store'), {
-            preserveScroll: true,
-        });
-    };
+});
+
+const category = usePage().props.category.data;
+
+const form = useForm({
+    name: category.name,
+})
+
+const submit = () => {
+    form.put(route('categories.update', category.id), {
+        preserveScroll: true,
+    });
+};
 </script>
 
 <template>
-    <Head title="Category Add" />
+    <Head title="Category Edit" />
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Create Category</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Edit Category {{category.name}}</h2>
         </template>
 
         <div class="py-12">
