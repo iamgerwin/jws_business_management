@@ -14,6 +14,7 @@ class TagController extends Controller
      */
     public function __invoke(Request $request)
     {
+        // TODO: need to optimize, avoid returning all.
         return TagResource::collection(Tag::all());
     }
 }

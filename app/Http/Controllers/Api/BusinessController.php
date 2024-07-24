@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CategoryResource;
-use App\Models\Category;
+use App\Http\Resources\BusinessesApiResource;
+use App\Models\Business;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class BusinessController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,6 +15,6 @@ class CategoryController extends Controller
     public function __invoke(Request $request)
     {
         // TODO: need to optimize, avoid returning all.
-        return CategoryResource::collection(Category::all());
+        return BusinessesApiResource::collection(Business::all());
     }
 }

@@ -11,7 +11,7 @@ class PersonUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -22,7 +22,23 @@ class PersonUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:people,email,' . $this->person->id],
+            'phone' => ['nullable', 'string', 'max:255', 'unique:people,phone,' . $this->person->id],
+            'business_id' => 'nullable|integer|exists:businesses,id',
+            'tag_ids' => 'nullable|array',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'name',
+            'email' => 'email',
+            'phone' => 'phone',
+            'business_id' => 'business',
+            'tag_ids' => 'tag',
         ];
     }
 }

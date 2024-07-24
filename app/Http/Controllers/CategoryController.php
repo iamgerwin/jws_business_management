@@ -15,6 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        // TODO: need to optimize, avoid returning all.
         $categories = CategoryResource::collection(Category::all());
 
         return Inertia::render('Categories/Index', ['categories' => $categories]);

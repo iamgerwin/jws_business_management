@@ -30,16 +30,16 @@ const submit = () => {
         </template>
 
         <div class="py-12">
-            <div class="bg-blue overflow-hidden shadow-sm sm:rounded-lg p-2 ">
-                <Link
-                    :href="route('categories.index')"
-                    class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
-                >
-                    List Categories
-                </Link>
-            </div>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="bg-blue overflow-hidden shadow-sm sm:rounded-lg p-2 ">
+                        <Link
+                            :href="route('categories.index')"
+                            class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+                        >
+                            List Categories
+                        </Link>
+                    </div>
                     <form @submit.prevent="submit" class="p-3.5">
                         <div class="grid grid-cols-6 gap-6">
                             <div class="col-span-6 sm:col-span-3">
