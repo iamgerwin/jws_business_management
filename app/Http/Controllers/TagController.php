@@ -16,6 +16,7 @@ class TagController extends Controller
      */
     public function index()
     {
+        // TODO: need to optimize, avoid returning all.
         $tags = TagResource::collection(Tag::all());
 
         return Inertia::render('Tags/Index', ['tags' => $tags]);
