@@ -11,7 +11,7 @@ class BusinessStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -22,7 +22,20 @@ class BusinessStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255|unique:businesses',
+            'email' => 'required|string|email|max:255|unique:businesses',
+            'category_ids' => 'nullable|array',
+            'tag_ids' => 'nullable|array',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => 'business name',
+            'email' => 'email',
+            'category_id' => 'categories',
+            'tag_ids' => 'tags',
         ];
     }
 }

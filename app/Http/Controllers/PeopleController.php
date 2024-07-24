@@ -6,8 +6,6 @@ use App\Http\Requests\PersonStoreRequest;
 use App\Http\Requests\PersonUpdateRequest;
 use App\Http\Resources\PersonResource;
 use App\Models\Person;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class PeopleController extends Controller
@@ -75,7 +73,7 @@ class PeopleController extends Controller
         $person->update($request->validated());
         $previousTagIds = $person->tags()->pluck('id')->all();
 
-        if ($person && $request->tag_ids && $request->tag_ids != $previousTagIds) {
+        if ($person && $request->tag_ids != $previousTagIds) {
             $person->tags()->sync($request->tag_ids);
         }
 

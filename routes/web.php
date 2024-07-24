@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PeopleController;
+use App\Http\Controllers\BusinessController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,10 +25,8 @@ Route::get('/dashboard', function () {
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('categories', CategoryController::class)->except(['show']);
     Route::resource('tags', TagController::class)->except(['show']);
-    Route::resource('people', PeopleController::class)->except(['show']);
-
-//    Route::resource('businesses', BusinessController::class);
-//    Route::resource('people', \App\Models\Person::class);
+    Route::resource('people', PeopleController::class);
+    Route::resource('businesses', BusinessController::class);
 //    Route::resource('tasks', \App\Models\Task::class);
 });
 
