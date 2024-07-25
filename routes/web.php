@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('people', PeopleController::class);
     Route::resource('businesses', BusinessController::class);
 
-//    Route::post('people/{person}/tasks', [PeopleController::class, 'storeTask'])->name('person.tasks.store');
+    Route::post('people/{person}/tasks', [PeopleController::class, 'storeTask'])->name('person.tasks.store');
     Route::post('businesses/{business}/tasks', [BusinessController::class, 'storeTask'])->name('business.tasks.store');
 });
 

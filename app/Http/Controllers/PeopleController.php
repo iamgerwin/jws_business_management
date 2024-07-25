@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PersonStoreRequest;
 use App\Http\Requests\PersonUpdateRequest;
+use App\Http\Requests\TaskStoreRequest;
 use App\Http\Resources\PersonResource;
+use App\Http\Resources\TaskResource;
 use App\Models\Person;
+use App\Models\Task;
 use Inertia\Inertia;
 
 class PeopleController extends Controller
@@ -50,9 +53,11 @@ class PeopleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Person $person)
     {
-        //
+        $person = PersonResource::make($person);
+        $tasks = TaskResource::collection($person->tasks);
+        return Inertia::render('People/Show', compact('person', 'tasks'));
     }
 
     /**
@@ -89,5 +94,11 @@ class PeopleController extends Controller
         $person->delete();
 
         return redirect()->route('people.index');
+    }
+
+    public function storeTask(TaskStoreRequest $request, Person $person)
+    {
+        $person->tasks()->save(new Task($request->validated()));
+        return redirect()->route('people.show', $person->id);
     }
 }
