@@ -5,6 +5,7 @@
     import InputError from "@/Components/InputError.vue";
     import {onMounted, ref} from "vue";
     import axios from "axios";
+    import MultipleSelectSubtitle from "@/Components/MultipleSelectSubtitle.vue";
 
     const form = useForm({
         first_name: null,
@@ -181,7 +182,7 @@
                                 <label
                                     for="tag_ids"
                                     class="block text-sm font-medium text-gray-700"
-                                >Tag</label
+                                >Tags</label
                                 >
                                 <select
                                     v-model="form.tag_ids"
@@ -205,6 +206,7 @@
                                     class="mt-2"
                                     :message="form.errors.tag_ids"
                                 />
+                                <MultipleSelectSubtitle />
                             </div>
                         </div>
 
