@@ -80,7 +80,7 @@ const openTask = (id) => {
                             <tbody class="bg-white">
                             <tr v-for="item in openTasks" :key="item.id">
                                 <td class="py-4 px-6 border-b border-gray-200">{{ item.title }}</td>
-                                <td class="py-4 px-6 border-b border-gray-200 truncate ">
+                                <td class="py-4 px-6 border-b border-gray-200 truncate flex items-center">
                                     <BusinessIcon v-if="item.owner_type === 'business'" />
                                     <PersonIcon v-if="item.owner_type === 'person'" />
                                     {{ item.owner_name }}</td>
@@ -111,7 +111,7 @@ const openTask = (id) => {
                             <tbody class="bg-white">
                             <tr v-for="item in completedTasks" :key="item.id">
                                 <td class="py-4 px-6 border-b border-gray-200">{{ item.title }}</td>
-                                <td class="py-4 px-6 border-b border-gray-200 truncate ">
+                                <td class="py-4 px-6 border-b border-gray-200 truncate flex items-center">
                                     <BusinessIcon v-if="item.owner_type === 'business'" />
                                     <PersonIcon v-if="item.owner_type === 'person'" />
                                     {{ item.owner_name }}</td>
