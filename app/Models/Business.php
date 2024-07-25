@@ -34,4 +34,6 @@ class Business extends Model
     {
         return $this->hasMany(Person::class, 'business_id');
     }
+
+
 }

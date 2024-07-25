@@ -5,6 +5,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\TaskStatusUpdateController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,6 +31,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::post('people/{person}/tasks', [PeopleController::class, 'storeTask'])->name('person.tasks.store');
     Route::post('businesses/{business}/tasks', [BusinessController::class, 'storeTask'])->name('business.tasks.store');
+    Route::post('task/{task}/{status?}', TaskStatusUpdateController::class)->name('task.update.status');
+
 });
 
 Route::middleware('auth')->group(function () {

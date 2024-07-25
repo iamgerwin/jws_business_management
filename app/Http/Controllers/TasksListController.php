@@ -1,24 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Business;
-use App\Models\Person;
+use App\Http\Resources\TaskResource;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
-class TaskListController extends Controller
+class TasksListController extends Controller
 {
     /**
      * Handle the incoming request.
      */
     public function __invoke(Request $request)
     {
-        $model = match ($request->type) {
-            'business' => Business::find($request->id),
-            default => Person::find($request->id),
-        };
-        $tasks = $model->tasks;
+        $tasks = TaskResource::collection(Task::all());
 
         if ($request->status) {
             $tasks = ($request->status === 'open') ? $tasks->where('status', 'open') : $tasks->where('status', 'completed');

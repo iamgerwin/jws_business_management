@@ -14,13 +14,18 @@ class TaskResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
-//        return [
-//            'id' => $this->id,
-//            'name' => $this->name,
-//            'email' => $this->email,
-//            'entity' => SectionResource::make($this->whenLoaded('section')),
-//            'created_at' => $this->created_at->toDateString(),
-//        ];
+        $taskable = $this->taskable()->first();
+        $owner_type = $this->taskable_type == 'App\Models\Person' ? 'person' : 'business';
+        $owner_name =  ($owner_type == 'person') ? $taskable->fullname : $taskable->name;
+
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'status' => $this->status,
+            'owner_type' => $owner_type,
+            'owner_name' => $owner_name,
+            'created_at' => $this->created_at->toFormattedDateString(),
+        ];
     }
 }

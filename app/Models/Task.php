@@ -26,4 +26,9 @@ class Task extends Model
     {
         $query->where('status', 'completed');
     }
+
+    public function related(): MorphOne
+    {
+//        return $this->morphOne(T::class, 'taggable');
+    }
 }

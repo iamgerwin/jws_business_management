@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\TaskListController;
+use App\Http\Controllers\TasksListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CategoryController;
@@ -20,4 +21,6 @@ Route::get('/user', function (Request $request) {
 Route::get('categories', CategoryController::class)->name('api.categories.index');
 Route::get('tags', TagController::class)->name('api.tags.index');
 Route::get('businesses', BusinessController::class)->name('api.businesses.index');
-Route::get('task/{type}/{id}', TaskListController::class)->whereIn('type', TaskableEnum::cases())->name('api.task.show');
+Route::get('task/{type}/{id}/{status?}', TaskListController::class)->whereIn('type', TaskableEnum::cases())->name('api.task.show');
+Route::get('tasks/{status?}', TasksListController::class)->name('api.tasks.index');
+
