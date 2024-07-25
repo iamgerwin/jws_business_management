@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Business;
+use App\Models\Person;
 use Illuminate\Http\Request;
 
 class TaskListController extends Controller
@@ -12,10 +14,13 @@ class TaskListController extends Controller
      */
     public function __invoke(Request $request)
     {
-        switch ($request->type) {
+         switch ($request->type) {
             case 'business':
-                break;
-            default;
+                $b = Business::find($request->id);
+                return response()->json($b->tasks->all());
+             default:
+                 $p = Person::find($request->id);
+                 return response()->json($p->tasks->all());
         }
     }
 }

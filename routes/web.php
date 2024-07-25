@@ -27,7 +27,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('tags', TagController::class)->except(['show']);
     Route::resource('people', PeopleController::class);
     Route::resource('businesses', BusinessController::class);
-//    Route::resource('tasks', \App\Models\Task::class);
+
+//    Route::post('people/{person}/tasks', [PeopleController::class, 'storeTask'])->name('person.tasks.store');
+    Route::post('businesses/{business}/tasks', [BusinessController::class, 'storeTask'])->name('business.tasks.store');
 });
 
 Route::middleware('auth')->group(function () {

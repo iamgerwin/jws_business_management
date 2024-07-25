@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BusinessStoreRequest;
 use App\Http\Requests\BusinessUpdateRequest;
+use App\Http\Requests\TaskStoreRequest;
 use App\Http\Resources\BusinessResource;
+use App\Http\Resources\TaskResource;
 use App\Models\Business;
+use App\Models\Task;
 use Inertia\Inertia;
 
 class BusinessController extends Controller
@@ -49,9 +52,10 @@ class BusinessController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Business $business)
     {
-        //
+        return Inertia::render('Business/Show', ['business' => BusinessResource::make($business),
+            'tasks' => TaskResource::collection($business->tasks)]);
     }
 
     /**
@@ -96,5 +100,11 @@ class BusinessController extends Controller
         $business->delete();
 
         return redirect()->route('businesses.index');
+    }
+
+    public function storeTask(TaskStoreRequest $request, Business $business)
+    {
+        $business->tasks()->save(new Task($request->validated()));
+        return redirect()->route('businesses.show', $business->id);
     }
 }
