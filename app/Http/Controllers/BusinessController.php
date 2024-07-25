@@ -39,7 +39,7 @@ class BusinessController extends Controller
         $business = Business::create($request->validated());
         if ($business) {
             if ($request->category_ids) {
-                $business->categories->sync($request->category_ids);
+                $business->categories()->sync($request->category_ids);
             }
             if ($request->tag_ids) {
                 $business->tags()->sync($request->tag_ids);
